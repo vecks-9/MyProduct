@@ -1,0 +1,204 @@
+GitHubを使う上で大切な用語
+①リポジトリ
+リモートリポジトリとローカルリポジトリがある
+リモートリポジトリはネットワーク上にある共有の保管場所
+ローカルリポジトリは自分のPC内にある個人の保管場所
+
+ローカルリポジトリで作業をして、リモートリポジトリにコピーする流れが作業の基本５つ
+
+②インデックス
+バージョン管理の対象にすることをインデックスに追加という
+新しくファイルを作成した場合、インデックスに追加を忘れず行う
+
+③コミット
+ローカルリポジトリにファイルを保存すること
+使うコマンド「git commit」
+
+④プッシュ
+リモートリポジトリに変更内容を反映させること
+使うコマンド「git push」
+
+⑤ブランチ
+履歴の流れを分岐して記録するもの
+1つのファイルに対し、変更Aと変更Bを作成できる
+
+
+git bash　コマンドの一覧と何に使ったかのまとめ
+
+
+コマンド	git --version
+表示		git version 2.39.0.windows.2
+gitのバージョンを確認するために使用
+最初に使って確認するためのもの？
+
+コマンド	git config --global user.name {ユーザー名}
+表示		なし
+ユーザー名の設定
+
+コマンド	git config --global user.email {メールアドレス}
+表示		なし
+アドレスの設定
+
+コマンド	git config --list
+
+表示↓
+
+diff.astextplain.textconv=astextplain
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+http.sslbackend=openssl
+http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+core.autocrlf=true
+core.fscache=true
+core.symlinks=false
+pull.rebase=false
+credential.helper=manager
+credential.https://dev.azure.com.usehttppath=true
+init.defaultbranch=master
+user.name=vecks
+user.email=yy4639993@gmail.com
+
+ユーザー名とメアドが設定したのになってればOK
+
+
+◆GitHubでファイルを作成する手順
+①リポジトリを作成
+②フォルダを作成
+③ファイルを作成
+④ファイルをインデックスに追加
+⑤ファイルをコミット
+⑥ファイルをプッシュ
+
+①はブラウザで行う
+publicかprivateは内容による
+リポジトリの名前さえ決めとけばいい
+他はあとで変更可能
+
+②
+コマンド	mkdir github_test
+github_testという名のディレクトリ(フォルダ)を作成
+
+コマンド	cd github_test
+github_testに移動する
+
+コマンド	git init
+表示		Initialized empty Git repository in C:/Users/sakam/github_test/.git/
+リポジトリを新規に作成する
+実行する時はディレクトリに移動してからすること
+
+③
+テキストファイルなどを作成したディレクトリ内に保存してから↓へ
+
+コマンド	git status
+表示		On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        helloworld.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+helloworld.txtというファイルを作成し、github_testのディレクトリ内に保存していることが確認できる
+helloworld.txtは赤文字になってる
+インデックスには登録されていないファイルがUntracted filesに表示されている
+この状態ではまだgit hubで扱えない
+
+④
+コマンド	git add helloworld.txt
+表示		なし
+helloworld.txtをインデックスに追加
+
+コマンド	git status
+表示		On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   helloworld.txt
+
+操作後はgit statusで状態確認してChanges to be committedになっているか確認すること
+家のPCだとnew fileの部分が緑文字になってる
+ここでインデックスに追加ができた
+
+⑤
+ローカルリポジトリに保管するためファイルをコミットする
+コマンド	git commit -m "add new file"
+表示		[master (root-commit) 2005320] add new file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 helloworld.txt
+
+"add new file"はコミットメッセージ
+あとでコミット履歴を確認する際に、何をしていたかを把握するためにも書いておくこと
+これでコミット完了
+
+リモートリポジトリを作成するとき
+コマンド	git remote add origin http://github.com/{ユーザー名}/test.git
+
+⑥
+ファイルをプッシュする
+コマンド	git push origin master
+表示		warning: redirecting to https://github.com/vecks-9/test.git/
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 226 bytes | 226.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To http://github.com/vecks-9/test.git
+ * [new branch]      master -> master
+
+プッシュ：リモートリポジトリにローカルリポジトリの変更を反映すること
+※初回はgit hubのユーザー名とパスを入力するボックスが表示される
+
+
+ブランチを使う場合
+同じファイルを複数人で使用するのに便利
+
+◆ブランチを使って別バージョンのファイルを作成する手順
+①ブランチを作成する
+②ブランチ内に移動する
+③ブランチ内でファイルを更新する
+④masterブランチでファイルが更新されていないことを確認する
+
+①
+コマンド「git branch {ブランチ名}」を実行
+確認は「git branch」で行う
+
+$ git branch
+  branch_test
+  branch_text
+* master
+
+ミスでbranch_textも出来ている
+masterはGitに最初から用意されているブランチ
+
+②
+コマンド「git checkout branch_test」
+
+$ git checkout branch_test
+Switched to branch 'branch_test'
+
+これでブランチ内で作業可能になる
+
+③
+ファイルの内容を変える
+自PC内のファイルを書き換えて保存してインデックスに追加する
+git add helloworld.txt
+ファイル名変えずに中身だけ変わってる
+
+追加後コミットする
+git commit -m "update helloworld.txt"
+コミットメッセージとしてアプデしてますと明記
+
+ブランチ内でファイルを更新する
+git push origin branch_test
+
+④
+masterのデータは更新されてないはず
+ブラウザ：リポジトリの画面masterのプルダウン内にbranch_testがあるかを確認
+masterのデータとbranch_test内のデータを確認
+master：変更前
+branch_test：変更後になっていることを確認できた
