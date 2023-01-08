@@ -1,3 +1,5 @@
+Study begins in September 2023.
+
 GitHubを使う上で大切な用語
 ①リポジトリ
 リモートリポジトリとローカルリポジトリがある
