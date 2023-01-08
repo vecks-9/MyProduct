@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+/* 全てのページに適用される設定 */
+html {
+	font-size: 16px;
+	font-family: sans-serif;	
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0 0 0 0;
+}
+p, li, td {
+	line-height: 1.7;
+}
+/* 半角あけない 4種の記載はこの順番通りに書くこと */
+a:link {
+	color: #F07D34;
+	text-decoration: none;
+}
+a:visited {
+	color: #F07D34;
+	text-decoration: none;
+}
+a:hover {
+	color: #F07D34;
+	text-decoration: underline;
+}
+a:active {
+	color: #F07D34;
+	text-decoration: underline;
+}
+/* 全てのページに適用 - ヘッダー */
+.header {
+	padding-top: 40px;
+	background-image: url(../images/stripe.png);
+	background-repeat: repeat-x;
+}
+.logo {
+	text-align: center;
+}
+.nav ul {
+	margin: 30px 0 0 0;
+	padding: 0;
+	list-style-type: none;
+	
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+}
+.nav a:link {
+	color: #253958;
+}
+.nav a:visited {
+	color: #253958;
+}
+.nav a:hover {
+	text-decoration: none;
+}
+.nav a:active {
+	text-decoration: none;
+}
+/* 全てのページに適用 - ヒーロー */
+.hero {
+	/* 
+	padding・marginは要素の余白をつけたい時に使う
+	padding: 137px 0;は上下に137pxずつ、左右に0ずつ
+	直観的でなく、見て分かりにくい 
+	*/
+	height: 274px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	color: #FFFFFF;
+	text-align: center;
+}
+.hero.index {
+	padding: 287px 0;
+	background-image: url(../images/home-hero.jpg);
+}
+.hero.access {
+	background-image: url(../images/access-hero.jpg);
+}
+.hero.menu {
+	background-image: url(../images/menu-hero.jpg);
+}
+.hero.contact {
+	background-image: url(../images/contact-hero.jpg);
+}
+/* 全てのページに適用 - メイン */
+main {
+	margin: 90px auto 90px auto;
+	max-width: 1000px;
+}
+main h2 {
+	margin: 60px 0 20px 0;
+	padding: 0 0 5px 0;
+	border-bottom: 2px solid #253958;
+	color: #253958;
+	font-size: 1.3rem;
+}
+img {
+	max-width: 100%;
+}
+
+
+/* 全てのページに適用 - フッター */
+.gotop {
+	text-align: right;
+}
+.copyright {
+	margin-top: 20px;
+	margin-bottom: 0px;
+	padding-top: 75px;
+	padding-bottom: 75px;
+	text-align: center;
+	background-color: #253958;
+	color: #FFFFFF;
+}
+/* 個別のスタイル */
+/* index.html */
+.logo-whale {
+	text-align: center;
+}
+
+.shop-info {
+	border-collapse: collapse;
+}
+.shop-info th, .shop-info td {
+	border: 1px solid #DBDBDB;
+	padding: 20px;
+}
+.shop-info th {
+	width: 112px;
+	text-align: left;
+	vertical-align: top;
+}
+/* menu.html */
+.items {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 20px;
+}
+/* contact.html */
+form {
+	margin: 0 auto;
+	max-width: 640px;
+}
+input[type="text"], textarea {
+	padding: 6px;
+	width: 100%;
+	font-size: 1rem;
+}
+textarea {
+	height: 140px;
+}
+.submit {
+	text-align: center;
+}
+input[type="submit"] {
+	border: none;
+	padding: 20px;
+	width: 200px;
+	background-color: #253958;
+	color: #FFFFFF;
+	font-size: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+	.nav ul {
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+	main {
+		padding: 0 4%;
+	}
+	
+	/* index.html */
+	.hero.index {
+		padding: 28vh 0;
+	}
+	
+	/* menu.html */
+	.items {
+		grid-template-columns: 1fr 1fr;
+	}
+}

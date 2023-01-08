@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>フォーム入力内容の確認 | KUZIRA CAFE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .result {
+            border-collapse: collapse;
+        }
+        .result th, .result td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body id="top">
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="logo">
+            <div class="logomark"><a href="index.html"><img src="images/logo.svg" alt="KUZIRA CAFE"></a></div>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="index.html#news">お知らせ</a></li>
+                <li><a href="index.html#shop">店舗情報</a></li>
+                <li><a href="access.html">アクセス</a></li>
+                <li><a href="menu.html">メニュー</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- ヘッダーここまで -->
+    <!-- 見出し&ヒーロー -->
+    <h1 class="hero contact">お問い合わせ</h1>
+    <!-- 見出し&ヒーローここまで -->
+    <!-- メイン -->
+    <main>
+        <h2>フォームの入力内容は正しく送信されていますか？</h2>
+        <table id="result" class="result">
+            <tr>
+                <th>設問</th>
+                <th>入力内容</th>
+            </tr>
+        </table>
+    </main>
+    <!-- メインここまで -->
+    <!-- フッター -->
+    <footer>
+        <div class="gotop">
+            <a href="#top"><img src="images/gotop.svg" alt="ページトップへ戻る"></a>
+        </div>
+        <p class="copyright">&copy; KUZIRA CAFE</p>
+    </footer>
+    <!-- フッターここまで -->
+    <script>
+        'use strict';
+
+        const render = function(q) {
+            const parent = document.getElementById('result');
+            for (const item of q) {
+                parent.insertAdjacentHTML('beforeend', `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', (e) => {
+            try {
+                const urlParam = decodeURIComponent(location.search.replace(/\+/g, ' ')).slice(1);
+                const qList = urlParam.split('&');
+                const queries = [];
+                for (const item of qList) {
+                    const split = item.split('=');
+                    queries.push([split[0], split[1].split('<').join('&lt;').split('>').join('&gt;')]);
+                }
+                render(queries);
+            } catch(err) {
+                console.log(err);
+            }
+        });
+    </script>
+</body>
+</html>
